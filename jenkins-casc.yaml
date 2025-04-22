@@ -1,0 +1,40 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "VMjunbo.1778#$%"
+        - id: "dev"
+          password: "dev"
+  # authorizationStrategy: loggedInUsersCanDoAnything
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Job/Build:dev"
+        - "Job/Cancel:dev"
+        - "Job/Read:dev"
+        - "Job/Workspace:dev"
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+        - "Run/Replay:dev"
+        - "Run/Update:dev"
+
+  # make sure our jenkins master has 1 executor so that we can run our pipelines
+  numExecutors: 1
+
+# specify the seedjob groovy script that will create the  pipelines for us
+jobs:
+  - file: /usr/local/seedjob.groovy
+
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: "git account(jenkins)"
+          id: "3c24e4e0-7e49-4a56-8cf5-79777e265ab5"
+          password: "{AQAAABAAAAAQRK+yoNlglswbWD/kRX5DTqQ3rcjbhX2MkzJq3QzEXro=}"
+          scope: GLOBAL
+          username: "jenkins"
+      
