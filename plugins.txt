@@ -13,3 +13,5 @@ pipeline-graph-view
 pipeline-groovy-lib
 pipeline-stage-view
 git
+gitea
+gitea-checks

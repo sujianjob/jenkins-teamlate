@@ -9,6 +9,7 @@ jenkins:
           password: "VMjunbo.1778#$%"
         - id: "dev"
           password: "dev"
+  # 90-iopjklnm,
   # authorizationStrategy: loggedInUsersCanDoAnything
   authorizationStrategy:
     globalMatrix:
@@ -49,14 +50,22 @@ jenkins:
 jobs:
   - file: /usr/local/seedjob.groovy
 
+# 凭据
 credentials:
   system:
     domainCredentials:
     - credentials:
       - usernamePassword:
           description: "git account(jenkins)"
-          id: "3c24e4e0-7e49-4a56-8cf5-79777e265ab5"
+          id: "git-account-jenkins"
           password: "{AQAAABAAAAAQRK+yoNlglswbWD/kRX5DTqQ3rcjbhX2MkzJq3QzEXro=}"
           scope: GLOBAL
           username: "jenkins"
-      
+# 系统配置
+unclassified:
+  giteaServers:
+    servers:
+    - credentialsId: "git-account-jenkins"
+      displayName: "gzjunbo"
+      manageHooks: true
+      serverUrl: "http://git.xdd.jetmobo.com"
