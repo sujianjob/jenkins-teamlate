@@ -1,4 +1,6 @@
 jenkins:
+
+# 下面是设定账号密码
   securityRealm:
     local:
       allowsSignup: false
@@ -19,6 +21,26 @@ jenkins:
         - "Overall/Read:authenticated"
         - "Run/Replay:dev"
         - "Run/Update:dev"
+
+# 下面是从 Gitea 获取登录信息
+  # securityRealm:
+  #   oic:
+  #     allowedTokenExpirationClockSkewSeconds: 0
+  #     clientId: "2ac67723-655b-4e83-80b3-84d0ad03ac30"
+  #     clientSecret: "{AQAAABAAAABAy2b3+JUbh1w9nhzIJC461ebzxyUBCpl6Q9yj0Q/S2zMN0Fzts5kqepPYRS0CbmUE/yahVVHTvnrS2iocJis4y72YYjyOmIthsymTdOTchQY=}"
+  #     disableSslVerification: false
+  #     emailFieldName: "email"
+  #     escapeHatchSecret: "{AQAAABAAAABAtO+qz5lQ90gDvyJoXYEJpllW0eDZPBY7EIfpqEUO5Qrab6tliK/mYAZu8+wwnCwE/2M7vipGl+yiZAwiYymMts8k6QnaowGXVJBlQ302U4k=}"
+  #     fullNameFieldName: "name"
+  #     groupIdStrategy: "caseSensitive"
+  #     groupsFieldName: "groups"
+  #     logoutFromOpenidProvider: false
+  #     serverConfiguration:
+  #       wellKnown:
+  #         wellKnownOpenIDConfigurationUrl: "http://git.xdd.jetmobo.com/.well-known/openid-configuration"
+  #     userIdStrategy: "caseSensitive"
+  #     userNameField: "name"
+
 
   # make sure our jenkins master has 1 executor so that we can run our pipelines
   numExecutors: 1

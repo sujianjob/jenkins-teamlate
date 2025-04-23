@@ -12,3 +12,4 @@ oic-auth
 pipeline-graph-view
 pipeline-groovy-lib
 pipeline-stage-view
+git

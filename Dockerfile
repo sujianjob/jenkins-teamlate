@@ -1,5 +1,10 @@
 FROM jenkins/jenkins:2.492.3-lts
 
+
+# 设置Jenkins更新中心为清华大学镜像
+ENV JENKINS_UC=https://mirrors.tuna.tsinghua.edu.cn/jenkins
+ENV JENKINS_UC_DOWNLOAD=https://mirrors.tuna.tsinghua.edu.cn/jenkins
+ENV JENKINS_PLUGIN_INFO=https://westeurope.cloudflare.jenkins.io/current/update-center.json
 # copy the list of plugins we want to install
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 # run the jenkins-plugin-cli script to install the plugins
