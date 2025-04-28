@@ -1,33 +1,70 @@
 jenkins:
 
 # 下面是设定账号密码
+  # securityRealm:
+  #   local:
+  #     allowsSignup: false
+  #     users:
+  #       - id: "admin"
+  #         password: "VMjunbo.1778#$%"
+  #       - id: "dev"
+  #         password: "dev"
+  # 下面是通过 git 的 openid授权
+  # c518a77e-1ac7-4805-91ff-ad4a84da5ab1
+
   securityRealm:
-    local:
-      allowsSignup: false
-      users:
-        - id: "admin"
-          password: "VMjunbo.1778#$%"
-        - id: "dev"
-          password: "dev"
-  # 90-iopjklnm,
-  # authorizationStrategy: loggedInUsersCanDoAnything
+    oic:
+      allowedTokenExpirationClockSkewSeconds: 0
+      clientId: "c518a77e-1ac7-4805-91ff-ad4a84da5ab1"
+      clientSecret: "{AQAAABAAAABA/hf68tLDUzmaqe8U7eJlafijh8UwMtV9Wa5dE+9mDu/bCFGd3lUz8UCoUyuagqyma8eugBIA+i024aWG5juRejh2ZmzHQv35JPnZ/k+OTEA=}"
+      disableSslVerification: false
+      emailFieldName: "email"
+      escapeHatchSecret: "{AQAAABAAAABAhp9xAlKpK0+jwSluyc7hHND3YX6yQyoetlwgkSV/SNzXNYKR2ilW75eAyKVTp79loJGFT2LYBEZWcmlFL0QhEWtCfgBlKaQ828ifwwkrKig=}"
+      fullNameFieldName: "name"
+      groupIdStrategy: "caseSensitive"
+      groupsFieldName: "groups"
+      logoutFromOpenidProvider: false
+      serverConfiguration:
+        wellKnown:
+          wellKnownOpenIDConfigurationUrl: "https://git.gzjunbo.net/.well-known/openid-configuration"
+      userIdStrategy: "caseSensitive"
+      userNameField: "name"
+
   authorizationStrategy:
     globalMatrix:
-      permissions:
-        - "Job/Build:dev"
-        - "Job/Cancel:dev"
-        - "Job/Read:dev"
-        - "Job/Workspace:dev"
-        - "Overall/Administer:admin"
-        - "Overall/Read:authenticated"
-        - "Run/Replay:dev"
-        - "Run/Update:dev"
+      entries:
+      - group:
+          name: "authenticated"
+          permissions:
+          - "Job/Build"
+          - "Job/Cancel"
+          - "Job/Configure"
+          - "Job/Create"
+          - "Job/Discover"
+          - "Job/Move"
+          - "Job/Read"
+          - "Job/Workspace"
+          - "SCM/Tag"
+          - "View/Configure"
+          - "View/Create"
+          - "View/Read"
+      - group:
+          name: "junbo:owners"
+          permissions:
+          - "Overall/Administer"
+      - user:
+          name: "anonymous"
+          permissions:
+          - "Job/Read"
+          - "Overall/Read"
+          - "View/Read"
 
 # 下面是从 Gitea 获取登录信息
   # securityRealm:
   #   oic:
   #     allowedTokenExpirationClockSkewSeconds: 0
   #     clientId: "2ac67723-655b-4e83-80b3-84d0ad03ac30"
+  #     # gto_mkqlz5t5ulo2rj5v7ylqgkfza7zsnqdwjzm6wiohfh55nn3kbz3a
   #     clientSecret: "{AQAAABAAAABAy2b3+JUbh1w9nhzIJC461ebzxyUBCpl6Q9yj0Q/S2zMN0Fzts5kqepPYRS0CbmUE/yahVVHTvnrS2iocJis4y72YYjyOmIthsymTdOTchQY=}"
   #     disableSslVerification: false
   #     emailFieldName: "email"
